@@ -1,20 +1,17 @@
-class EvalExp {
-  constructor(rawString = "") {
-
-    if(typeof rawString !== "string") {
-      throw TypeError("Argument should be string")
+export default function (stringExpression = "") {
+    if(typeof stringExpression !== "string") {
+        return {
+            value: null,
+            errors: "Wrong arguments",
+            parsedData: null
+        }
     }
-    this.rawString = rawString;
-    this.value = 0;
+    const parsedData = [];
 
-  }
 
-  valueOf() {
-    return this.getValue();
-  }
-  getValue () {
-    return this.value;
-  }
+    return {
+        value: 0,
+        errors: null,
+        parsedData: []
+    }
 }
-
-export default EvalExp;

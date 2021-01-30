@@ -43,5 +43,6 @@
     "webpack-cli": "^4.4.0"
   },
   "dependencies": {},
-  "jest": {}
+  "jest": {
+  }
 }
