@@ -5,7 +5,8 @@ export default function organizeBracketExpressions(rootTokenNode) {
     const subExpressions = [rootTokenNode];
     const tokens = rootTokenNode.value;
     rootTokenNode.value= [];
-    for(const token of tokens) {
+    for(let i=0; i < tokens.length; i++) {
+        const token = tokens[i];
         const currentTokenNode = subExpressions[subExpressions.length -1];
         if(token.type === tokenizeType.BRACKET_OPEN) {
             const newTokenNode = {

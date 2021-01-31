@@ -1,3 +1,4 @@
 export default {
-    EXPRESSION: "expression"
+    EXPRESSION: "expression",
+    MATH_EXPRESSION: "math_expression"
 };
