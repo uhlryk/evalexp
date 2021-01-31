@@ -1,7 +1,7 @@
 import organizeType from "./organizeType";
 import tokenizeType from "../tokenization/tokenizeType";
 
-export default function organizeSubExpressions(rootTokenNode) {
+export default function organizeBracketExpressions(rootTokenNode) {
     const subExpressions = [rootTokenNode];
     const tokens = rootTokenNode.value;
     rootTokenNode.value= [];
@@ -17,7 +17,7 @@ export default function organizeSubExpressions(rootTokenNode) {
         } else if(token.type === tokenizeType.BRACKET_CLOSE) {
             subExpressions.pop();
         } else if(token.type === tokenizeType.EXPRESSION) {
-            currentTokenNode.value.push(organizeSubExpressions(token));
+            currentTokenNode.value.push(organizeBracketExpressions(token));
         } else {
             currentTokenNode.value.push(token);
         }

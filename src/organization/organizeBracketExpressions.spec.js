@@ -1,8 +1,8 @@
-import organizeSubExpressions from "./organizeSubExpressions";
+import organizeBracketExpressions from "./organizeBracketExpressions";
 import organizeType from "./organizeType";
 import tokenizeType from "../tokenization/tokenizeType";
 
-describe("organizeSubExpressions", () => {
+describe("organizeBracketExpressions", () => {
   it("numA*(numB+numC)+numD", () => {
     const rootTokenNode = {
       type: organizeType.EXPRESSION,
@@ -19,7 +19,7 @@ describe("organizeSubExpressions", () => {
       ]
     };
 
-    const result = organizeSubExpressions(rootTokenNode);
+    const result = organizeBracketExpressions(rootTokenNode);
     expect(result).to.be.eql({
       type: organizeType.EXPRESSION,
       value: [
@@ -65,7 +65,7 @@ describe("organizeSubExpressions", () => {
       ]
     };
 
-    const result = organizeSubExpressions(rootTokenNode);
+    const result = organizeBracketExpressions(rootTokenNode);
     expect(result).to.be.eql({
       type: organizeType.EXPRESSION,
       value: [
@@ -117,7 +117,7 @@ describe("organizeSubExpressions", () => {
         { value: "10", type: tokenizeType.NUMBER }
       ]
     };
-    const result = organizeSubExpressions(rootTokenNode);
+    const result = organizeBracketExpressions(rootTokenNode);
     expect(result).to.be.eql({
       type: organizeType.EXPRESSION,
       value: [
