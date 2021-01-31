@@ -1,10 +1,9 @@
 import evalexp from "./index";
-import {describe, expect} from "@jest/globals";
 
 describe("evalexp", () => {
   describe("when no arguments", () => {
-    test("should evaluate to object with value 0", () => {
-      expect(evalexp()).toEqual({
+    it("should evaluate to object with value 0", () => {
+      expect(evalexp()).to.be.eql({
         value: 0,
         errors: null,
         parsedData: []
@@ -12,8 +11,8 @@ describe("evalexp", () => {
     });
   });
   describe("when wrong argument", () => {
-    test("should return object with error", () => {
-      expect(evalexp(1234)).toEqual({
+    it("should return object with error", () => {
+      expect(evalexp(1234)).to.be.eql({
         value: null,
         errors: "Wrong arguments",
         parsedData: null

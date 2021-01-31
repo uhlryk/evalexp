@@ -1,27 +1,35 @@
 {
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "modules": true,
-            "experimentalObjectRestSpread": true
-        }
-    },
-    "plugins": [],
-    "extends": ["eslint:recommended"],
-    "rules": {
-        "comma-dangle": 0,
-        "no-unused-vars": "warn",
-        "no-unexpected-multiline": "warn",
-        "prefer-const": "warn"
-    },
-    "settings": {},
-    "env": {
-        "browser": true,
-        "node": true,
-        "jasmine": true,
-        "jest": true,
-        "es6": true
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
     }
+  },
+  "extends": [
+    "standard",
+    "prettier"
+  ],
+  "rules": {
+    "strict": 0,
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+    "valid-typeof": "off",
+    "handle-callback-err": "off",
+    "standard/no-callback-literal": "off"
+  },
+  "globals": {
+    "sinon": true,
+    "it": true,
+    "xit": true,
+    "expect": true,
+    "describe": true,
+    "xdescribe": true,
+    "request": true,
+    "beforeEach": true,
+    "before": true,
+    "afterEach": true,
+    "after": true
+  }
 }
