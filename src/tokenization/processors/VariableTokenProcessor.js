@@ -1,8 +1,8 @@
 import tokenizeType from "../tokenizeType";
 
-class NumberTokenProcessor {
+class VariableTokenProcessor {
   static isApplicable(character) {
-    return !isNaN(parseInt(character));
+    return /^[a-z]+$/i.test( character );
   }
 
   constructor() {
@@ -10,7 +10,7 @@ class NumberTokenProcessor {
   }
 
   isStillApplicable(character) {
-    return !isNaN(parseInt(character));
+    return /^[a-z0-9]+$/i.test( character );
   }
 
   process(character) {
@@ -20,8 +20,8 @@ class NumberTokenProcessor {
   getToken() {
     return {
       value: this.data,
-      type: tokenizeType.NUMBER
+      type: tokenizeType.VARIABLE
     };
   }
 }
-export default NumberTokenProcessor;
+export default VariableTokenProcessor;

@@ -1,4 +1,5 @@
 import debug from "debug";
+import VariableTokenProcessor from "./processors/VariableTokenProcessor";
 import NumberTokenProcessor from "./processors/NumberTokenProcessor";
 import OperatorTokenProcessor from "./processors/OperatorTokenProcessor";
 import WhitespaceTokenProcessor from "./processors/WhitespaceTokenProcessor";
@@ -9,6 +10,7 @@ const processors = [
   CloseBracketTokenProcessor,
   WhitespaceTokenProcessor,
   OperatorTokenProcessor,
+  VariableTokenProcessor,
   NumberTokenProcessor
 ];
 const log = debug("evalexp:tokenize");

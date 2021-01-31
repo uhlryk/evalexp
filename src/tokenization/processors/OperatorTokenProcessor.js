@@ -1,4 +1,4 @@
-import tokenizeType from "../../tokenizeType";
+import tokenizeType from "../tokenizeType";
 
 const operators = ["+","-", "*", "/"];
 class OperatorTokenProcessor {

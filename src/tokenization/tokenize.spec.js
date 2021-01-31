@@ -1,5 +1,5 @@
 import tokenize from "./tokenize";
-import tokenizeType from "../tokenizeType";
+import tokenizeType from "./tokenizeType";
 
 describe("tokenization", () => {
   it("numA", () => {
@@ -83,7 +83,7 @@ describe("tokenization", () => {
       {
         type: tokenizeType.BRACKET_CLOSE,
         value: ")"
-      },
+      }
     ]);
   });
   it(" numA * ( numB + numC ) ", () => {
@@ -115,7 +115,55 @@ describe("tokenization", () => {
       {
         type: tokenizeType.BRACKET_CLOSE,
         value: ")"
+      }
+    ]);
+  });
+  it("variable", () => {
+    expect(tokenize("myVar123")).to.be.eql([
+      {
+        type: tokenizeType.VARIABLE,
+        value: "myVar123"
+      }
+    ]);
+  });
+  it("10+variable", () => {
+    expect(tokenize("10+myVar123")).to.be.eql([
+      {
+        type: tokenizeType.NUMBER,
+        value: "10"
       },
+      {
+        type: tokenizeType.OPERATOR,
+        value: "+"
+      },
+      {
+        type: tokenizeType.VARIABLE,
+        value: "myVar123"
+      }
+    ]);
+  });
+  it("10+variable+20", () => {
+    expect(tokenize("10+myVar123*5")).to.be.eql([
+      {
+        type: tokenizeType.NUMBER,
+        value: "10"
+      },
+      {
+        type: tokenizeType.OPERATOR,
+        value: "+"
+      },
+      {
+        type: tokenizeType.VARIABLE,
+        value: "myVar123"
+      },
+      {
+        type: tokenizeType.OPERATOR,
+        value: "*"
+      },
+      {
+        type: tokenizeType.NUMBER,
+        value: "5"
+      }
     ]);
   });
 });
