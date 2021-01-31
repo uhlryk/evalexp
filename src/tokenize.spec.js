@@ -1,7 +1,7 @@
 import tokenize from "./tokenize";
 import tokenizeType from "./tokenizeType";
 
-describe("flatParse", () => {
+describe("tokenize", () => {
   it("numA", () => {
     expect(tokenize("10")).to.be.eql([
       {
@@ -23,7 +23,7 @@ describe("flatParse", () => {
     ]);
   });
   it("numA+numB", () => {
-    expect(tokenize("10+10")).to.be.eql([
+    expect(tokenize("10+20")).to.be.eql([
       {
         type: tokenizeType.NUMBER,
         value: "10"
