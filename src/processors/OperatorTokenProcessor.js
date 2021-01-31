@@ -7,10 +7,6 @@ class OperatorTokenProcessor {
         return operators.includes(character);
     }
 
-    static start() {
-        return new OperatorTokenProcessor();
-    }
-
     constructor() {
         this.data = "";
     }

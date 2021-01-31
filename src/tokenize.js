@@ -1,6 +1,11 @@
 import NumberTokenProcessor from "./processors/NumberTokenProcessor";
 import OperatorTokenProcessor from "./processors/OperatorTokenProcessor";
-const processors = [NumberTokenProcessor, OperatorTokenProcessor];
+import WhitespaceTokenProcessor from "./processors/WhitespaceTokenProcessor";
+const processors = [
+  WhitespaceTokenProcessor,
+  OperatorTokenProcessor,
+  NumberTokenProcessor
+];
 
 export default function tokenize(stringExpression) {
   const result = [];
@@ -13,20 +18,25 @@ export default function tokenize(stringExpression) {
     if (currentProcessor && !currentProcessor.isStillApplicable(character)) {
       console.log("finalize processor");
       const token = currentProcessor.getToken();
-      result.push(token);
       currentProcessor = null;
-      console.log("new token", token);
+      if (token) {
+        result.push(token);
+
+        console.log("new token", token);
+      }
     }
     if (!currentProcessor) {
       console.log("look for new processor");
-      const currentProcessorFactory = processors.find(
+      const CurrentProcessorConstructor = processors.find(
         processors => processors && processors.isApplicable(character)
       );
-      if(currentProcessorFactory) {
-          currentProcessor = currentProcessorFactory.start();
-          console.log("new processor ", currentProcessor);
+      if (CurrentProcessorConstructor) {
+        currentProcessor = new CurrentProcessorConstructor();
+        console.log("new processor ", currentProcessor);
       } else {
-          console.log("not found new processor - ignoring - in future throw error");
+        console.log(
+          "not found new processor - ignoring - in future throw error"
+        );
       }
     }
     if (currentProcessor) {
@@ -37,9 +47,10 @@ export default function tokenize(stringExpression) {
   if (currentProcessor) {
     console.log("finalize tokenizer");
     const token = currentProcessor.getToken();
-    result.push(token);
-    currentProcessor = null;
-    console.log("new token", token);
+    if (token) {
+      result.push(token);
+      console.log("new token", token);
+    }
   }
 
   return result;

@@ -1,32 +1,27 @@
 import tokenizeType from "../tokenizeType";
 
 class NumberTokenProcessor {
+  static isApplicable(character) {
+    return !isNaN(parseInt(character));
+  }
 
-    static isApplicable(character) {
-        return !isNaN(character);
-    }
+  constructor() {
+    this.data = "";
+  }
 
-    static start() {
-        return new NumberTokenProcessor();
-    }
+  isStillApplicable(character) {
+    return !isNaN(parseInt(character));
+  }
 
-    constructor() {
-        this.data = "";
-    }
+  process(character) {
+    this.data = this.data + "" + character;
+  }
 
-    isStillApplicable(character) {
-        return !isNaN(character);
-    }
-
-    process(character) {
-        this.data = this.data + "" + character;
-    }
-
-    getToken() {
-        return {
-            value: this.data,
-            type: tokenizeType.NUMBER
-        };
-    }
+  getToken() {
+    return {
+      value: this.data,
+      type: tokenizeType.NUMBER
+    };
+  }
 }
 export default NumberTokenProcessor;

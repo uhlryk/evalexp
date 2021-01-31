@@ -38,6 +38,22 @@ describe("tokenize", () => {
       }
     ]);
   });
+  it(" numA + numB ", () => {
+    expect(tokenize(" 10 + 20 ")).to.be.eql([
+      {
+        type: tokenizeType.NUMBER,
+        value: "10"
+      },
+      {
+        type: tokenizeType.OPERATOR,
+        value: "+"
+      },
+      {
+        type: tokenizeType.NUMBER,
+        value: "20"
+      }
+    ]);
+  });
   it("numA*(numB+numC)", () => {
     expect(tokenize("5*(3+4)")).to.be.eql([
       {
