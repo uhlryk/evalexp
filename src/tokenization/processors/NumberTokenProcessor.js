@@ -1,4 +1,4 @@
-import tokenizeType from "../tokenizeType";
+import tokenizeType from "../../tokenizeType";
 
 class NumberTokenProcessor {
   static isApplicable(character) {

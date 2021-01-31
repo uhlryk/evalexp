@@ -1,7 +1,7 @@
 import tokenize from "./tokenize";
-import tokenizeType from "./tokenizeType";
+import tokenizeType from "../tokenizeType";
 
-describe("tokenize", () => {
+describe("tokenization", () => {
   it("numA", () => {
     expect(tokenize("10")).to.be.eql([
       {

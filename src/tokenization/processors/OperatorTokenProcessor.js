@@ -1,7 +1,7 @@
-import tokenizeType from "../tokenizeType";
+import tokenizeType from "../../tokenizeType";
 
-const operators = ["("];
-class OpenBracketTokenProcessor {
+const operators = ["+","-", "*", "/"];
+class OperatorTokenProcessor {
 
     static isApplicable(character) {
         return operators.includes(character);
@@ -16,14 +16,14 @@ class OpenBracketTokenProcessor {
     }
 
     process(character) {
-        this.data = character;
+        this.data = this.data + "" + character;
     }
 
     getToken() {
         return {
             value: this.data,
-            type: tokenizeType.BRACKET_OPEN
+            type: tokenizeType.OPERATOR
         };
     }
 }
-export default OpenBracketTokenProcessor;
+export default OperatorTokenProcessor;
