@@ -1,7 +1,11 @@
 import NumberTokenProcessor from "./processors/NumberTokenProcessor";
 import OperatorTokenProcessor from "./processors/OperatorTokenProcessor";
 import WhitespaceTokenProcessor from "./processors/WhitespaceTokenProcessor";
+import OpenBracketTokenProcessor from "./processors/OpenBracketTokenProcessor";
+import CloseBracketTokenProcessor from "./processors/CloseBracketTokenProcessor";
 const processors = [
+  OpenBracketTokenProcessor,
+  CloseBracketTokenProcessor,
   WhitespaceTokenProcessor,
   OperatorTokenProcessor,
   NumberTokenProcessor

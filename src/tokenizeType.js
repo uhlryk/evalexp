@@ -1,5 +1,7 @@
 export default {
   NUMBER: "number",
   OPERATOR: "operator",
-  EXPRESSION: "expression"
+  EXPRESSION: "expression",
+  BRACKET_OPEN: "bracket_open",
+  BRACKET_CLOSE: "bracket_close",
 };
