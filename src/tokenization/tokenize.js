@@ -15,7 +15,7 @@ const processors = [
 ];
 const log = debug("evalexp:tokenize");
 export default function tokenize(stringExpression) {
-  const result = [];
+  const tokens = [];
   let currentProcessor = null;
 
   for (let i = 0; i < stringExpression.length; i++) {
@@ -27,8 +27,7 @@ export default function tokenize(stringExpression) {
       const token = currentProcessor.getToken();
       currentProcessor = null;
       if (token) {
-        result.push(token);
-
+        tokens.push(token);
         log("new token", token);
       }
     }
@@ -53,10 +52,10 @@ export default function tokenize(stringExpression) {
     log("finalize tokenizer");
     const token = currentProcessor.getToken();
     if (token) {
-      result.push(token);
+      tokens.push(token);
       log("new token", token);
     }
   }
 
-  return result;
+  return tokens;
 }
