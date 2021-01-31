@@ -1,3 +1,4 @@
+import debug from "debug";
 import NumberTokenProcessor from "./processors/NumberTokenProcessor";
 import OperatorTokenProcessor from "./processors/OperatorTokenProcessor";
 import WhitespaceTokenProcessor from "./processors/WhitespaceTokenProcessor";
@@ -10,50 +11,48 @@ const processors = [
   OperatorTokenProcessor,
   NumberTokenProcessor
 ];
-
+const log = debug("evalexp:tokenize");
 export default function tokenize(stringExpression) {
   const result = [];
   let currentProcessor = null;
 
   for (let i = 0; i < stringExpression.length; i++) {
     const character = stringExpression[i];
-    console.log("process character ", character);
-    console.log("current Processor ", currentProcessor);
+    log("process character ", character);
+    log("current Processor ", currentProcessor);
     if (currentProcessor && !currentProcessor.isStillApplicable(character)) {
-      console.log("finalize processor");
+      log("finalize processor");
       const token = currentProcessor.getToken();
       currentProcessor = null;
       if (token) {
         result.push(token);
 
-        console.log("new token", token);
+        log("new token", token);
       }
     }
     if (!currentProcessor) {
-      console.log("look for new processor");
+      log("look for new processor");
       const CurrentProcessorConstructor = processors.find(
         processors => processors && processors.isApplicable(character)
       );
       if (CurrentProcessorConstructor) {
         currentProcessor = new CurrentProcessorConstructor();
-        console.log("new processor ", currentProcessor);
+        log("new processor ", currentProcessor);
       } else {
-        console.log(
-          "not found new processor - ignoring - in future throw error"
-        );
+        log("not found new processor - ignoring - in future throw error");
       }
     }
     if (currentProcessor) {
-      console.log("process");
+      log("process");
       currentProcessor.process(character);
     }
   }
   if (currentProcessor) {
-    console.log("finalize tokenizer");
+    log("finalize tokenizer");
     const token = currentProcessor.getToken();
     if (token) {
       result.push(token);
-      console.log("new token", token);
+      log("new token", token);
     }
   }
 
