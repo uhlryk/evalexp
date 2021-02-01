@@ -1,7 +1,6 @@
 import organize from "./organize";
 import organizeType from "./organizeType";
 import tokenizeType from "../tokenization/tokenizeType";
-import organizeBracketExpressions from "./organizeBracketExpressions";
 describe("organize", () => {
   it("numA+numD", () => {
     const tokens = [
