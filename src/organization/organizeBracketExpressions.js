@@ -2,6 +2,13 @@ import organizeType from "./organizeType";
 import tokenizeType from "../tokenization/tokenizeType";
 
 export default function organizeBracketExpressions(rootTokenNode) {
+    if (
+        ![organizeType.MATH_EXPRESSION, organizeType.EXPRESSION].includes(
+            rootTokenNode.type
+        )
+    ) {
+        return rootTokenNode;
+    }
     const subExpressions = [rootTokenNode];
     const tokens = rootTokenNode.value;
     rootTokenNode.value= [];
