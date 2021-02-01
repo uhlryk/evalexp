@@ -1,5 +1,4 @@
 import organizeType from "./organizeType";
-import tokenizeType from "../tokenization/tokenizeType";
 import organizeOperatorExpressions from "./organizeOperatorExpressions";
 import organizeBracketExpressions from "./organizeBracketExpressions";
 
