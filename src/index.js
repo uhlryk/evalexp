@@ -1,16 +1,12 @@
-export default function(stringExpression = "") {
-  if (typeof stringExpression !== "string") {
-    return {
-      value: null,
-      errors: "Wrong arguments",
-      parsedData: null
-    };
-  }
-  const parsedData = [];
+import tokenize from "./tokenization/tokenize";
+import organize from "./organization/organize";
+import evaluate from "./evaluation/evaluate";
 
-  return {
-    value: 0,
-    errors: null,
-    parsedData: []
-  };
+export default function(stringExpression = "0") {
+  const tokens = tokenize(stringExpression);
+
+  const tokenNodes = organize(tokens);
+
+  const evaluation = evaluate(tokenNodes);
+  return evaluation;
 }

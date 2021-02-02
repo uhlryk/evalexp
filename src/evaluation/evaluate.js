@@ -28,6 +28,6 @@ export default function evaluate(rootTokenNode) {
     }
   } else if (rootTokenNode.type === tokenizeType.VARIABLE) {
   } else {
-    return rootTokenNode.value;
+    return Number(rootTokenNode.value);
   }
 }
