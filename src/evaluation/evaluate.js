@@ -11,12 +11,12 @@ const operators = [
   multiplicationMath,
   divisionMath
 ];
-export default function evaluate(rootTokenNode) {
+export default function evaluate(rootTokenNode, variableObject = {}) {
   if (rootTokenNode.type === organizeType.EXPRESSION) {
-    return evaluate(rootTokenNode.value[0]);
+    return evaluate(rootTokenNode.value[0], variableObject);
   } else if (rootTokenNode.type === organizeType.MATH_EXPRESSION) {
-    const leftTokenValue = evaluate(rootTokenNode.value[0]);
-    const rightTokenValue = evaluate(rootTokenNode.value[1]);
+    const leftTokenValue = evaluate(rootTokenNode.value[0], variableObject);
+    const rightTokenValue = evaluate(rootTokenNode.value[1], variableObject);
     const operator = operators.find(operator =>
       operator.isApplicable(rootTokenNode)
     );
@@ -27,6 +27,15 @@ export default function evaluate(rootTokenNode) {
       return 0;
     }
   } else if (rootTokenNode.type === tokenizeType.VARIABLE) {
+    if(typeof variableObject[rootTokenNode.value] !== "undefined") {
+      if(typeof variableObject[rootTokenNode.value] === "function") {
+        return variableObject[rootTokenNode.value]();
+      } else {
+        return variableObject[rootTokenNode.value];
+      }
+    } else {
+      throw Error("Variable not initialized");
+    }
   } else {
     return Number(rootTokenNode.value);
   }
