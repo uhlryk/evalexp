@@ -55,6 +55,7 @@ export default class BaseToken {
 
     setRoot(root) {
         this.root = root;
+        this.root.addGlobalChild(this);
     }
 
     getRoot() {
