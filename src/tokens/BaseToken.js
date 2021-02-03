@@ -12,8 +12,7 @@ export default class BaseToken {
         if (ApplicableToken) {
             return ApplicableToken;
         } else {
-            console.log(character);
-            throw SyntaxError("No applicable token types");
+            throw SyntaxError(`No applicable token type for ${character}`);
         }
     }
 

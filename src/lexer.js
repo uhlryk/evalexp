@@ -1,4 +1,4 @@
-import ArrayAccessor from "./ArrayAccessor";
+import CharacterAccessor from "./CharacterAccessor";
 import BaseToken from "./tokens/BaseToken";
 import RootToken from "./tokens/RootToken";
 import NumberToken from "./tokens/NumberToken";
@@ -18,9 +18,9 @@ BaseToken.registerTokenType(MultiplicationToken);
 BaseToken.registerTokenType(BracketToken);
 
 export default function lexer(stringExpression) {
-    const iterator = new ArrayAccessor(stringExpression);
+    const iterator = new CharacterAccessor(stringExpression);
+    iterator.removeCharacters(/\s/g);
     const rootToken = new RootToken(iterator);
     rootToken.parse();
-    console.log(rootToken.getGlobalList());
     return rootToken;
 }
