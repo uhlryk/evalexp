@@ -19,6 +19,7 @@ export default class GroupToken extends BaseToken{
         const applicableToken = this.getApplicableToken();
         if(applicableToken) {
             this.addChild(applicableToken);
+            applicableToken.setRoot(this.getRoot());
             applicableToken.setParent(this);
             applicableToken.parse();
         }

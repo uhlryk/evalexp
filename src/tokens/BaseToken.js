@@ -53,6 +53,14 @@ export default class BaseToken {
         return this.parent;
     }
 
+    setRoot(root) {
+        this.root = root;
+    }
+
+    getRoot() {
+        return this.root;
+    }
+
     isChildAllowed() {
         return true;
     }
@@ -62,7 +70,8 @@ export default class BaseToken {
             const value = this.getIterator().getValue();
             if (value && (!this.getParent() || this.getParent().isChildAllowed())) {
                 const ApplicableTokenType = BaseToken.getApplicable(value);
-                return new ApplicableTokenType(this.getIterator());
+                const applicableToken = new ApplicableTokenType(this.getIterator());
+                return applicableToken;
             } else {
                 return null;
             }
@@ -75,6 +84,7 @@ export default class BaseToken {
         const applicableToken = this.getApplicableToken();
         if(applicableToken) {
             this.setRight(applicableToken);
+            applicableToken.setRoot(this.getRoot());
             applicableToken.setLeft(this);
             applicableToken.setParent(this.getParent());
             this.getParent().addChild(applicableToken);

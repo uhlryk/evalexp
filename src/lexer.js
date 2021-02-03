@@ -21,5 +21,6 @@ export default function lexer(stringExpression) {
     const iterator = new ArrayAccessor(stringExpression);
     const rootToken = new RootToken(iterator);
     rootToken.parse();
-    console.table(rootToken);
+
+    return rootToken;
 }
