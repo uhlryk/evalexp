@@ -9,13 +9,13 @@ export default class BracketToken extends GroupToken {
         return this.getIterator().getValue() !== ")";
     }
 
-    process() {
+    parse() {
         const nextValue = this.getIterator().getNextValue();
         if (nextValue === ")") {
             this.getIterator().moveNext();
-            this.processLeft();
+            this.parseLeft();
         }
-        this.processUp();
-        this.processLeft();
+        this.parseUp();
+        this.parseLeft();
     }
 }

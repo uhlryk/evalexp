@@ -14,7 +14,7 @@ export default class ValueToken extends BaseToken {
         return this.value;
     }
 
-    process() {
-        this.processLeft();
+    parse() {
+        this.parseLeft();
     }
 }

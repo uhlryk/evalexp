@@ -71,16 +71,16 @@ export default class BaseToken {
         }
     }
 
-    processLeft() {
+    parseLeft() {
         const applicableToken = this.getApplicableToken();
         if(applicableToken) {
             this.setRight(applicableToken);
             applicableToken.setLeft(this);
             applicableToken.setParent(this.getParent());
             this.getParent().addChild(applicableToken);
-            applicableToken.process();
+            applicableToken.parse();
         }
     }
 
-    process() {}
+    parse() {}
 }

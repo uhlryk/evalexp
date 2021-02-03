@@ -20,6 +20,6 @@ BaseToken.registerTokenType(BracketToken);
 export default function lexer(stringExpression) {
     const iterator = new ArrayAccessor(stringExpression);
     const rootToken = new RootToken(iterator);
-    rootToken.process();
+    rootToken.parse();
     console.table(rootToken);
 }

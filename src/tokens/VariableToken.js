@@ -7,7 +7,7 @@ export default class VariableToken extends ValueToken {
         return /^[a-z]$/i.test( character );
     }
 
-    process() {
+    parse() {
         while(true) {
             const nextValue = this.getIterator().getNextValue();
             if(/^[a-z0-9]$/i.test( nextValue )) {
@@ -17,6 +17,6 @@ export default class VariableToken extends ValueToken {
                 break;
             }
         }
-        this.processLeft();
+        this.parseLeft();
     }
 }

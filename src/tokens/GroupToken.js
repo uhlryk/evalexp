@@ -15,12 +15,12 @@ export default class GroupToken extends BaseToken{
         return this.children[index];
     }
 
-    processUp() {
+    parseUp() {
         const applicableToken = this.getApplicableToken();
         if(applicableToken) {
             this.addChild(applicableToken);
             applicableToken.setParent(this);
-            applicableToken.process();
+            applicableToken.parse();
         }
     }
 }
