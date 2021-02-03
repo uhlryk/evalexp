@@ -1,7 +1,7 @@
-import OperatorToken from "./OperatorToken";
+import LeftRightOperatorToken from "./LeftRightOperatorToken";
 
 
-export default class MultiplicationToken extends OperatorToken {
+export default class MultiplicationToken extends LeftRightOperatorToken {
     static isApplicable(character) {
         return character === "*";
     }

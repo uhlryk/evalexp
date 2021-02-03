@@ -11,6 +11,10 @@ export default class GroupToken extends BaseToken{
         this.children.push(child);
     }
 
+    addChildAtIndex(child, index) {
+        this.children[index] = child;
+    }
+
     getChild(index) {
         return this.children[index];
     }

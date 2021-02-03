@@ -1,6 +1,8 @@
-import ValueToken from "./ValueToken";
+import GroupToken from "./GroupToken";
 
 
-export default class OperatorToken extends ValueToken {
-
+export default class OperatorToken extends GroupToken {
+    parse() {
+        this.parseLeft();
+    }
 }

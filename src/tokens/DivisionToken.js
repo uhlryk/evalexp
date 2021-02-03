@@ -1,7 +1,7 @@
-import OperatorToken from "./OperatorToken";
+import LeftRightOperatorToken from "./LeftRightOperatorToken";
 
 
-export default class DivisionToken extends OperatorToken {
+export default class DivisionToken extends LeftRightOperatorToken {
     static isApplicable(character) {
         return character === "/";
     }
