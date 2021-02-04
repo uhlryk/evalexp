@@ -1,7 +1,4 @@
 import OperatorToken from "./OperatorToken";
-import ValueToken from "./ValueToken";
-import GroupToken from "./GroupToken";
-
 
 export default class LeftRightOperatorToken extends OperatorToken {
 
@@ -9,8 +6,16 @@ export default class LeftRightOperatorToken extends OperatorToken {
         this.addChildAtIndex(child, 0);
     }
 
+    getLeftChild() {
+        return this.getChild(0);
+    }
+
     setRightChild(child) {
         this.addChildAtIndex(child, 1);
+    }
+
+    getRightChild() {
+        return this.getChild(1);
     }
 
     transformLeftOperand() {

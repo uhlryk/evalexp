@@ -32,4 +32,8 @@ export default class GroupToken extends BaseToken{
             applicableToken.parse();
         }
     }
+
+    evaluate() {
+        return this.getChild(0).evaluate();
+    }
 }

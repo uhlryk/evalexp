@@ -97,4 +97,6 @@ export default class BaseToken {
     }
 
     parse() {}
+
+    evaluate() {}
 }

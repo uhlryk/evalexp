@@ -19,4 +19,8 @@ export default class NumberToken extends ValueToken {
         }
         this.parseLeft();
     }
+
+    evaluate() {
+        return Number(this.getValue());
+    }
 }
