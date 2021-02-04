@@ -22,6 +22,10 @@ export default class BaseToken {
 
     constructor(iterator) {
         this.iterator = iterator;
+        this.left = null;
+        this.right = null;
+        this.parent = null;
+        this.root = null;
     }
 
     getIterator() {
