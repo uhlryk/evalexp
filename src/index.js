@@ -1,10 +1,21 @@
-import tokenize from "./tokenization/tokenize";
-import organize from "./organization/organize";
-import evaluate from "./evaluation/evaluate";
+import lexer from "./lexer";
+import transformer from "./transformer";
 
-export default function(stringExpression = "0", variableObject = {}) {
-  const tokens = tokenize(stringExpression);
-  const tokenNodes = organize(tokens);
-  const evaluation = evaluate(tokenNodes, variableObject);
-  return evaluation;
+export default class EvalExp {
+    constructor(rawString) {
+        this.rawString = rawString;
+    }
+
+    parse() {
+        this.rootToken = lexer(this.rawString);
+        transformer(this.rootToken);
+    }
+
+    getParsedTree() {
+        return this.rootToken;
+    }
+
+    evaluate(declarations) {
+        return this.rootToken.evaluate(declarations);
+    }
 }
