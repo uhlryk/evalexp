@@ -2,9 +2,11 @@ import MultiplicationToken from "./tokens/MultiplicationToken";
 import DivisionToken from "./tokens/DivisionToken";
 import AdditionToken from "./tokens/AdditionToken";
 import SubtractionToken from "./tokens/SubtractionToken";
+import VariableToken from "./tokens/VariableToken";
 
 export default function transformer(rootToken) {
     const orderedOperatorTypes = [
+        VariableToken,
         MultiplicationToken,
         DivisionToken,
         AdditionToken,

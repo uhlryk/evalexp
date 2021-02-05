@@ -69,10 +69,23 @@ describe("EvalExp", () => {
 
     describe("when variable is defined in expression numA + (varA + num C) * numD", () => {
         it("should evaluate", () => {
-            const evalExp = new EvalExp("10 + 5");
+            const evalExp = new EvalExp("10 + (varA + 5) * 2");
             expect(
-                evalExp.evaluate()
-            ).to.eql(15);
+                evalExp.evaluate({
+                    varA: () => 5
+                })
+            ).to.eql(30);
+        });
+    });
+
+    describe("when variable is defined in expression without multiplication operator numAvarA", () => {
+        it("should evaluate", () => {
+            const evalExp = new EvalExp("10varA");
+            expect(
+                evalExp.evaluate({
+                    varA: () => 5
+                })
+            ).to.eql(50);
         });
     });
 

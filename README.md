@@ -41,6 +41,7 @@ evalExp.evaluate({
 - addition:  numA + numB
 - subtraction: numA - numB
 - multiplication: numA * numB
+- multiplication of number and variable without operator: numAvarA e.g. 10someVar means 10*someVar
 - division: numA / numB
 - brackets: numA * ( numB + (numC + numD))
 - variables
