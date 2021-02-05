@@ -6,6 +6,11 @@ describe("EvalExp", () => {
         evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(10);
     });
+    it("floatA", () => {
+        const evalExp = new EvalExp("10.4");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(10.4);
+    });
     it("numA + numB", () => {
         const evalExp = new EvalExp("10 + 20");
         evalExp.parse();

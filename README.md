@@ -3,7 +3,9 @@
 Mathematical expression parser and evaluator
 It accepts string expression. Then it creates parsed object and and evaluate it.
 
-Library is not using eval function. It is parsing string, based on it, creates new expression and evaluating it.
+#### **Library is not using eval()**
+
+It is parsing string, based on it, creates new expression and evaluating it.
 
 -   It don't have access to global variables.
 -   It is not creating global variables
@@ -35,6 +37,7 @@ evalExp.evaluate({
 
 - minus numbers: -numA
 - plus numbers: +numA
+- floating numbers 
 - addition:  numA + numB
 - subtraction: numA - numB
 - multiplication: numA * numB
@@ -45,5 +48,4 @@ evalExp.evaluate({
 
 ## limitations
 
-- floating numbers are not supported
 - functions with brackets and arguments
