@@ -31,3 +31,17 @@ evalExp.evaluate({
 - **instance.evaluate(<variable declaration>)**  - evaluate expression and return value
 
 
+## supported grammar
+
+- addition:  numA + numB
+- subtraction: numA - numB
+- multiplication: numA * numB
+- division: numA / numB
+- brackets: numA * ( numB + (numC + numD))
+- variables
+- functions without arguments - use like variables
+
+## limitations
+
+- floating numbers are not supported
+- functions with brackets and arguments
