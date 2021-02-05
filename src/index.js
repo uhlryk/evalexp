@@ -4,6 +4,7 @@ import transformer from "./transformer";
 export default class EvalExp {
     constructor(rawString) {
         this.rawString = rawString;
+        this.rootToken = null;
     }
 
     parse() {
@@ -12,10 +13,18 @@ export default class EvalExp {
     }
 
     getParsedTree() {
+        this.parseIfNotParsed();
         return this.rootToken;
     }
 
-    evaluate(declarations) {
+    evaluate(declarations = {}) {
+        this.parseIfNotParsed();
         return this.rootToken.evaluate(declarations);
+    }
+
+    parseIfNotParsed() {
+        if(!this.rootToken) {
+            this.parse();
+        }
     }
 }

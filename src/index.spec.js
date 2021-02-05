@@ -28,15 +28,22 @@ describe("EvalExp", () => {
         });
     });
 
-    describe("when variable is defined in expression numA + (varA + num C) * numD", () => {
-        it("should evaluate", () => {
+    describe("when parse method whas not executed", () => {
+        it("should throw error", () => {
             const evalExp = new EvalExp("10 + (varA + 5) * 2");
             evalExp.parse();
+            expect(() => evalExp.evaluate()).to.throw(
+                "Expected variable is not defined varA"
+            );
+        });
+    });
+
+    describe("when variable is defined in expression numA + (varA + num C) * numD", () => {
+        it("should evaluate", () => {
+            const evalExp = new EvalExp("10 + 5");
             expect(
-                evalExp.evaluate({
-                    varA: 3
-                })
-            ).to.eql(26);
+                evalExp.evaluate()
+            ).to.eql(15);
         });
     });
 

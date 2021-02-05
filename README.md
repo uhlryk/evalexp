@@ -27,7 +27,7 @@ evalExp.evaluate({
 ## methods
 
 - **new EvalExp(<expression string>)**  - create instance for expression
-- **instance.parse()**  - parse expression, should be called before evaluate method
+- **instance.parse()**  - parse expression
 - **instance.evaluate(<variable declaration>)**  - evaluate expression and return value
 
 
