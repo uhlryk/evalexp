@@ -11,12 +11,24 @@ export default class VariableToken extends ValueToken {
         while(true) {
             const nextValue = this.getIterator().getNextValue();
             if(/^[a-z0-9]$/i.test( nextValue )) {
-                this.getIterator().moveNext();
+                this.getIterator().moveLeft();
                 this.setValue(this.getValue() + "" + nextValue);
             } else {
                 break;
             }
         }
         this.parseLeft();
+    }
+
+    evaluate(declarations) {
+        const variableName = this.getValue();
+        if(!declarations || !(variableName in declarations)) {
+            throw SyntaxError(`Expected variable is not defined ${variableName}`);
+        }
+        const variable = declarations[variableName];
+        if(typeof variable === "function") {
+            return Number(variable());
+        }
+        return Number(variable);
     }
 }

@@ -6,7 +6,7 @@ export default class MultiplicationToken extends LeftRightOperatorToken {
         return character === "*";
     }
 
-    evaluate() {
-        return this.getLeftChild().evaluate() * this.getRightChild().evaluate();
+    evaluate(declarations) {
+        return this.getLeftChild().evaluate(declarations) * this.getRightChild().evaluate(declarations);
     }
 }

@@ -33,7 +33,7 @@ export default class GroupToken extends BaseToken{
         }
     }
 
-    evaluate() {
-        return this.getChild(0).evaluate();
+    evaluate(declarations) {
+        return this.getChild(0).evaluate(declarations);
     }
 }

@@ -15,7 +15,7 @@ export default class EvalExp {
         return this.rootToken;
     }
 
-    evaluate() {
-        return this.rootToken.evaluate();
+    evaluate(declarations) {
+        return this.rootToken.evaluate(declarations);
     }
 }
