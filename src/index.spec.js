@@ -12,10 +12,34 @@ describe("EvalExp", () => {
         expect(evalExp.evaluate()).to.be.eql(30);
     });
 
+    it("+numA", () => {
+        const evalExp = new EvalExp("+10");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(10);
+    });
+
+    it("-numA", () => {
+        const evalExp = new EvalExp("-10");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(-10);
+    });
+
     it("numA + (numB + num C) * numD", () => {
         const evalExp = new EvalExp("10 + (20 + 5) * 2");
         evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(60);
+    });
+
+    it("numA + (-num C) * numD", () => {
+        const evalExp = new EvalExp("10 + (-10) * 2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(-10);
+    });
+
+    it("numA + (numBsmall-numCbig) * numD", () => {
+        const evalExp = new EvalExp("10 + (5-10) * 2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(0);
     });
 
     describe("when variable not defined in expression numA + (varA + num C) * numD", () => {

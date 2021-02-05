@@ -1,7 +1,7 @@
-import LeftRightOperatorToken from "./LeftRightOperatorToken";
+import LeftNotNullRightOperatorToken from "./LeftNotNullRightOperatorToken";
 
 
-export default class SubtractionToken extends LeftRightOperatorToken {
+export default class SubtractionToken extends LeftNotNullRightOperatorToken {
     static isApplicable(character) {
         return character === "-";
     }

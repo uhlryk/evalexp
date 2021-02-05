@@ -28,11 +28,13 @@ evalExp.evaluate({
 
 - **new EvalExp(<expression string>)**  - create instance for expression
 - **instance.parse()**  - parse expression
-- **instance.evaluate(<variable declaration>)**  - evaluate expression and return value
+- **instance.evaluate(<variable declaration>)**  - evaluate expression and return value. Can be invoked multiple times with different variable declarations
 
 
 ## supported grammar
 
+- minus numbers: -numA
+- plus numbers: +numA
 - addition:  numA + numB
 - subtraction: numA - numB
 - multiplication: numA * numB

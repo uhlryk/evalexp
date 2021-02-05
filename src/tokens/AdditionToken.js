@@ -1,7 +1,6 @@
-import LeftRightOperatorToken from "./LeftRightOperatorToken";
+import LeftNotNullRightOperatorToken from "./LeftNotNullRightOperatorToken";
 
-
-export default class AdditionToken extends LeftRightOperatorToken {
+export default class AdditionToken extends LeftNotNullRightOperatorToken {
     static isApplicable(character) {
         return character === "+";
     }
