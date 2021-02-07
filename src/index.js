@@ -1,7 +1,7 @@
 import lexer from "./lexer";
 import transformer from "./transformer";
 
-export default class EvalExp {
+class EvalExp {
     constructor(rawString) {
         this.rawString = rawString;
         this.rootToken = null;
@@ -28,3 +28,8 @@ export default class EvalExp {
         }
     }
 }
+
+export default EvalExp;
+export {
+    EvalExp
+};

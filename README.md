@@ -26,6 +26,9 @@ User writes input like this
 
 ```javascript
 import EvalExp from "evalexp";
+// or 
+const {EvalExp} =  require("evalexp");
+
 
 const evalExp = new EvalExp("10 + (varA + 5) * 2");
 evalExp.parse();
