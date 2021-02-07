@@ -32,7 +32,11 @@ export default class AbstractToken {
         this.modificators = [];
     }
 
-    addModificator
+    addModificator(modificator) {
+        this.modificators.push(modificator);
+    }
+
+
     getIterator() {
         return this.iterator;
     }
@@ -103,5 +107,11 @@ export default class AbstractToken {
 
     parse() {}
 
-    evaluate() {}
+    evaluateModifiers() {
+        this.modificators.forEach(modificator => modificator.transform(this));
+    }
+
+    evaluate() {
+        this.evaluateModifiers();
+    }
 }
