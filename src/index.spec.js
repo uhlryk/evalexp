@@ -6,6 +6,11 @@ describe("EvalExp", () => {
         evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(10);
     });
+    it("-numA*numB", () => {
+        const evalExp = new EvalExp("-5*3");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(-15);
+    });
     it("floatA", () => {
         const evalExp = new EvalExp("10.4");
         evalExp.parse();
@@ -115,6 +120,15 @@ describe("EvalExp", () => {
         evalExp.parse();
         expect(
             evalExp.evaluate({
+                k6: () => 3,
+                strength: 2
+            })
+        ).to.eql(13);
+    });
+
+    it("3k6+2strength from factory", () => {
+        expect(
+            EvalExp.evaluate("3k6+2strength", {
                 k6: () => 3,
                 strength: 2
             })

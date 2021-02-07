@@ -2,13 +2,18 @@ import lexer from "./lexer";
 import transformer from "./transformer";
 
 class EvalExp {
-    constructor(rawString) {
-        this.rawString = rawString;
+    static evaluate(expression, declarations={}) {
+        const evalExp = new EvalExp(expression);
+        return evalExp.evaluate(declarations);
+    }
+
+    constructor(expression) {
+        this.expression = expression;
         this.rootToken = null;
     }
 
     parse() {
-        this.rootToken = lexer(this.rawString);
+        this.rootToken = lexer(this.expression);
         transformer(this.rootToken);
     }
 
