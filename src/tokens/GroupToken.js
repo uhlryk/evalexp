@@ -1,7 +1,7 @@
-import BaseToken from "./BaseToken";
+import AbstractToken from "./AbstractToken";
 
 
-export default class GroupToken extends BaseToken{
+export default class GroupToken extends AbstractToken{
     constructor(props) {
         super(props);
         this.children = [];

@@ -1,6 +1,6 @@
-import BaseToken from "./BaseToken";
+import AbstractToken from "./AbstractToken";
 
-export default class ValueToken extends BaseToken {
+export default class ValueToken extends AbstractToken {
     constructor(iterator) {
         super(iterator);
         this.value = iterator.getValue();

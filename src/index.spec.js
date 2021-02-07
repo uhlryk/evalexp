@@ -78,7 +78,7 @@ describe("EvalExp", () => {
         });
     });
 
-    describe("when variable is defined in expression without multiplication operator numAvarA", () => {
+    describe("when number and variable are together without multiplication operator", () => {
         it("should evaluate", () => {
             const evalExp = new EvalExp("10varA");
             expect(
@@ -88,6 +88,15 @@ describe("EvalExp", () => {
             ).to.eql(50);
         });
     });
+
+    // describe("when number and bracket are together without multiplication operator", () => {
+    //     it("should evaluate", () => {
+    //         const evalExp = new EvalExp("10(5+3)");
+    //         expect(
+    //             evalExp.evaluate()
+    //         ).to.eql(80);
+    //     });
+    // });
 
     describe("when variable is defined and is no arg func in expression numA + (varA + num C) * numD", () => {
         it("should evaluate", () => {

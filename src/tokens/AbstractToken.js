@@ -1,12 +1,12 @@
-export default class BaseToken {
+export default class AbstractToken {
     static registeredTokenTypes = [];
 
     static registerTokenType(TokenType) {
-        BaseToken.registeredTokenTypes.push(TokenType);
+        AbstractToken.registeredTokenTypes.push(TokenType);
     }
 
     static getApplicable(character) {
-        const ApplicableToken = BaseToken.registeredTokenTypes.find(TokenType =>
+        const ApplicableToken = AbstractToken.registeredTokenTypes.find(TokenType =>
             TokenType.isApplicable(character)
         );
         if (ApplicableToken) {
@@ -21,13 +21,18 @@ export default class BaseToken {
     }
 
     constructor(iterator) {
+        if(new.target === AbstractToken) {
+            throw SyntaxError("AbstractToken is abstract class");
+        }
         this.iterator = iterator;
         this.left = null;
         this.right = null;
         this.parent = null;
         this.root = null;
+        this.modificators = [];
     }
 
+    addModificator
     getIterator() {
         return this.iterator;
     }
@@ -73,7 +78,7 @@ export default class BaseToken {
         if (this.getIterator().moveLeft()) {
             const value = this.getIterator().getValue();
             if (value && (!this.getParent() || this.getParent().isChildAllowed())) {
-                const ApplicableTokenType = BaseToken.getApplicable(value);
+                const ApplicableTokenType = AbstractToken.getApplicable(value);
                 const applicableToken = new ApplicableTokenType(this.getIterator());
                 return applicableToken;
             } else {

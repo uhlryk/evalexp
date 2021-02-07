@@ -1,5 +1,5 @@
 import CharacterAccessor from "./CharacterAccessor";
-import BaseToken from "./tokens/BaseToken";
+import BaseToken from "./tokens/AbstractToken";
 import RootToken from "./tokens/RootToken";
 import NumberToken from "./tokens/NumberToken";
 import VariableToken from "./tokens/VariableToken";
