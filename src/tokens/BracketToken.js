@@ -1,8 +1,14 @@
 import GroupToken from "./GroupToken";
+import AddMultiplicationOperatorTransformModifier from "./transformModifier/AddMultiplicationOperatorTransformModifier";
 
 export default class BracketToken extends GroupToken {
     static isApplicable(character) {
         return character === "(";
+    }
+
+    constructor(iterator) {
+        super(iterator);
+        this.addTransformModifier(new AddMultiplicationOperatorTransformModifier());
     }
 
     isChildAllowed() {

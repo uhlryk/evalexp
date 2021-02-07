@@ -21,7 +21,7 @@ export default class AbstractToken {
     }
 
     constructor(iterator) {
-        if(new.target === AbstractToken) {
+        if (new.target === AbstractToken) {
             throw SyntaxError("AbstractToken is abstract class");
         }
         this.iterator = iterator;
@@ -29,13 +29,12 @@ export default class AbstractToken {
         this.right = null;
         this.parent = null;
         this.root = null;
-        this.modificators = [];
+        this.transformModifiers = [];
     }
 
-    addModificator(modificator) {
-        this.modificators.push(modificator);
+    addTransformModifier(modifier) {
+        this.transformModifiers.push(modifier);
     }
-
 
     getIterator() {
         return this.iterator;
@@ -95,7 +94,7 @@ export default class AbstractToken {
 
     parseLeft() {
         const applicableToken = this.getApplicableToken();
-        if(applicableToken) {
+        if (applicableToken) {
             this.setRight(applicableToken);
             applicableToken.setRoot(this.getRoot());
             applicableToken.setLeft(this);
@@ -107,11 +106,13 @@ export default class AbstractToken {
 
     parse() {}
 
-    evaluateModifiers() {
-        this.modificators.forEach(modificator => modificator.transform(this));
+    executeTransformModifiers() {
+        this.transformModifiers.forEach(modifier => modifier.transform(this));
     }
 
-    evaluate() {
-        this.evaluateModifiers();
+    transform() {
+        this.executeTransformModifiers();
     }
+
+    evaluate() {}
 }

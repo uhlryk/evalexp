@@ -1,6 +1,6 @@
-export default class AbstractModificator {
+export default class AbstractTransformModifier {
     constructor() {
-        if (new.target === AbstractModificator) {
+        if (new.target === AbstractTransformModifier) {
             throw SyntaxError("AbstractModificator is abstract class");
         }
     }

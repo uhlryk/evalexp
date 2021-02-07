@@ -1,12 +1,16 @@
 import ValueToken from "./ValueToken";
-import NumberToken from "./NumberToken";
-import MultiplicationToken from "./MultiplicationToken";
+import AddMultiplicationOperatorTransformModifier from "./transformModifier/AddMultiplicationOperatorTransformModifier";
 
 
 export default class VariableToken extends ValueToken {
 
     static isApplicable(character) {
         return /^[a-z]$/i.test( character );
+    }
+
+    constructor(iterator) {
+        super(iterator);
+        this.addTransformModifier(new AddMultiplicationOperatorTransformModifier());
     }
 
     parse() {
@@ -20,24 +24,6 @@ export default class VariableToken extends ValueToken {
             }
         }
         this.parseLeft();
-    }
-
-    transformAddMultiplicationOperator() {
-        const operand = this.getLeft();
-        if(operand && operand instanceof NumberToken) {
-            const multiplicationToken = new MultiplicationToken(this.getIterator());
-            operand.setRight(multiplicationToken);
-            multiplicationToken.setLeft(operand);
-            this.setLeft(multiplicationToken);
-            multiplicationToken.setRight(this);
-            multiplicationToken.setParent(this.getParent());
-            this.getParent().addChild(multiplicationToken);
-            multiplicationToken.setRoot(this.getRoot());
-        }
-    }
-
-    transform() {
-        this.transformAddMultiplicationOperator();
     }
 
     evaluate(declarations) {

@@ -89,14 +89,14 @@ describe("EvalExp", () => {
         });
     });
 
-    // describe("when number and bracket are together without multiplication operator", () => {
-    //     it("should evaluate", () => {
-    //         const evalExp = new EvalExp("10(5+3)");
-    //         expect(
-    //             evalExp.evaluate()
-    //         ).to.eql(80);
-    //     });
-    // });
+    describe("when number and bracket are together without multiplication operator", () => {
+        it("should evaluate", () => {
+            const evalExp = new EvalExp("10(5+3)");
+            expect(
+                evalExp.evaluate()
+            ).to.eql(80);
+        });
+    });
 
     describe("when variable is defined and is no arg func in expression numA + (varA + num C) * numD", () => {
         it("should evaluate", () => {
@@ -108,5 +108,16 @@ describe("EvalExp", () => {
                 })
             ).to.eql(30);
         });
+    });
+
+    it("3k6+2strength", () => {
+        const evalExp = new EvalExp("3k6+2strength");
+        evalExp.parse();
+        expect(
+            evalExp.evaluate({
+                k6: () => 3,
+                strength: 2
+            })
+        ).to.eql(13);
     });
 });
