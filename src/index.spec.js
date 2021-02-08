@@ -1,10 +1,13 @@
-import EvalExp from "./index";
+import EvalExp, {evaluate} from "./index";
 
 describe("EvalExp", () => {
     it("numA", () => {
         const evalExp = new EvalExp("10");
         evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(10);
+    });
+    it("numA from function", () => {
+        expect(evaluate("10")).to.be.eql(10);
     });
     it("-numA*numB", () => {
         const evalExp = new EvalExp("-5*3");

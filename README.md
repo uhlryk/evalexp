@@ -48,6 +48,18 @@ EvalExp.evaluate("3k6+2strength", {
 }); //return number 13
 ```
 
+or from function
+```javascript
+import {evaluate} from "evalexp";
+//or
+const {evaluate} =  require("evalexp");
+
+evaluate("3k6+2strength", {
+    k6: () => 3,
+    strength: 2
+});
+```
+
 ## methods
 -   **EvalExp.evaluate(expression string, variable declaration)** - evaluate expression and return value   
 -   **new EvalExp(<expression string>)** - create instance for expression
@@ -58,27 +70,27 @@ EvalExp.evaluate("3k6+2strength", {
 
 -   minus numbers:
 
-```
+```javascript
 EvalExp.evaluate("-5") 
 EvalExp.evaluate("-5*3") 
 ```
 
 -   plus numbers:
 
-```
+```javascript
 EvalExp.evaluate("5")
 EvalExp.evaluate("+5")
 ```
 
 -   floating numbers :
 
-```
+```javascript
 EvalExp.evaluate("4.345")
 ```
 
 -   addition:
 
-```
+```javascript
 EvalExp.evaluate("5+4")
 EvalExp.evaluate("+4+34")
 EvalExp.evaluate("56.43+32")
@@ -86,57 +98,57 @@ EvalExp.evaluate("56.43+32")
 
 -   subtraction:
 
-```
+```javascript
 EvalExp.evaluate("34-21")
 EvalExp.evaluate("33-44")
 ```
 
 -   multiplication:
 
-```
+```javascript
 EvalExp.evaluate("5*5")
 EvalExp.evaluate("-3*8")
 ```
 
 -   division:
 
-```
+```javascript
 EvalExp.evaluate("10/2")
 ```
 
 -   brackets:
 
-```
+```javascript
 EvalExp.evaluate("5*(3+(5-3)/4)")
 ```
 
 multiplication operator can be ignored
 
-```
+```javascript
 EvalExp.evaluate("3(10+45)")
 ```
 
 -   variables
 
-```
+```javascript
 EvalExp.evaluate("3*someVariable")
 ```
 
 multiplication operator can be ignored
 
-```
+```javascript
 EvalExp.evaluate("3someVariable")
 ```
 
 -   functions without arguments - use like variables (without brackets)
 
-```
+```javascript
 EvalExp.evaluate("3*someFunctions")
 ```
 
 multiplication operator can be ignored
 
-```
+```javascript
 EvalExp.evaluate("3someFunctions")
 ```
 
