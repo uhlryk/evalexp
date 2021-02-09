@@ -23,6 +23,14 @@ export default class GroupToken extends AbstractToken{
         return this.children[index];
     }
 
+    getNumChildren() {
+        return this.children.length;
+    }
+
+    getChildren() {
+        return this.children;
+    }
+
     parseUp() {
         const applicableToken = this.getApplicableToken();
         if(applicableToken) {

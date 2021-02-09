@@ -26,8 +26,7 @@ export default class LeftRightOperatorToken extends OperatorToken {
         return operand;
     }
 
-    transformLeftOperand() {
-        const operand = this.getLeftOperand();
+    transformLeftOperand(operand) {
         const leftOperandSibling = operand.getLeft();
         if(operand.getParent()) {
             operand.getParent().removeChild(operand);
@@ -35,11 +34,9 @@ export default class LeftRightOperatorToken extends OperatorToken {
         operand.setParent(this);
         operand.setLeft(null);
         operand.setRight(null);
-        this.setLeftChild(operand);
         if(leftOperandSibling) {
             leftOperandSibling.setRight(this);
         }
-        this.setLeft(leftOperandSibling);
     }
 
     getRightOperand() {
@@ -50,8 +47,7 @@ export default class LeftRightOperatorToken extends OperatorToken {
         return operand;
     }
 
-    transformRightOperand() {
-        const operand = this.getRightOperand();
+    transformRightOperand(operand) {
         const rightOperandSibling = operand.getRight();
         if(operand.getParent()) {
             operand.getParent().removeChild(operand);
@@ -60,15 +56,17 @@ export default class LeftRightOperatorToken extends OperatorToken {
         operand.setParent(this);
         operand.setLeft(null);
         operand.setRight(null);
-        this.setRightChild(operand);
         if(rightOperandSibling) {
             rightOperandSibling.setLeft(this);
         }
-        this.setRight(rightOperandSibling);
     }
 
     transform() {
-        this.transformLeftOperand();
-        this.transformRightOperand();
+        const leftOperand = this.getLeftOperand();
+        this.transformLeftOperand(leftOperand);
+        this.setLeftChild(leftOperand);
+        const rightOperand = this.getRightOperand();
+        this.transformRightOperand(rightOperand);
+        this.setRightChild(rightOperand);
     }
 }

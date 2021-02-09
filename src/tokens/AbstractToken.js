@@ -29,11 +29,6 @@ export default class AbstractToken {
         this.right = null;
         this.parent = null;
         this.root = null;
-        this.transformModifiers = [];
-    }
-
-    addTransformModifier(modifier) {
-        this.transformModifiers.push(modifier);
     }
 
     getIterator() {
@@ -106,12 +101,7 @@ export default class AbstractToken {
 
     parse() {}
 
-    executeTransformModifiers() {
-        this.transformModifiers.forEach(modifier => modifier.transform(this));
-    }
-
     transform() {
-        this.executeTransformModifiers();
     }
 
     evaluate() {}

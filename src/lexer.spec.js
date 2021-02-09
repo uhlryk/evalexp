@@ -41,7 +41,7 @@ describe("lexer", () => {
         expect(tokenList[1]).to.be.an.instanceof(AdditionToken);
 
         expect(tokenList[2]).to.be.an.instanceof(VariableToken);
-        expect(tokenList[2]).to.have.property("value", "varA");
+        expect(tokenList[2]).to.have.property("name", "varA");
     });
 
     it("numA + (numB + num C) * numD", () => {

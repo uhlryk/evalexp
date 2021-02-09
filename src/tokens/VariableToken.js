@@ -1,24 +1,32 @@
-import ValueToken from "./ValueToken";
-import AddMultiplicationOperatorTransformModifier from "./transformModifier/AddMultiplicationOperatorTransformModifier";
+import GroupToken from "./GroupToken";
+import addMultiplicationOperator from "./transformModifier/addMultiplicationOperator";
+import BracketToken from "./BracketToken";
 
-
-export default class VariableToken extends ValueToken {
-
+export default class VariableToken extends GroupToken {
     static isApplicable(character) {
-        return /^[a-z]$/i.test( character );
+        return /^[a-z]$/i.test(character);
     }
 
     constructor(iterator) {
         super(iterator);
-        this.addTransformModifier(new AddMultiplicationOperatorTransformModifier());
+        this.name = iterator.getValue();
+        this.isFunction = false;
+    }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
     }
 
     parse() {
-        while(true) {
+        while (true) {
             const nextValue = this.getIterator().getNextValue();
-            if(/^[a-z0-9]$/i.test( nextValue )) {
+            if (/^[a-z0-9]$/i.test(nextValue)) {
                 this.getIterator().moveLeft();
-                this.setValue(this.getValue() + "" + nextValue);
+                this.setName(this.getName() + "" + nextValue);
             } else {
                 break;
             }
@@ -26,14 +34,41 @@ export default class VariableToken extends ValueToken {
         this.parseLeft();
     }
 
+    transform() {
+        const rightOperand = this.getRight();
+        if (rightOperand && rightOperand instanceof BracketToken) {
+            this.isFunction = true;
+            const rightOperandSibling = rightOperand.getRight();
+            if(rightOperand.getParent()) {
+                rightOperand.getParent().removeChild(rightOperand);
+            }
+            rightOperand.getParent().removeChild(rightOperand);
+            rightOperand.setParent(this);
+            rightOperand.setLeft(null);
+            rightOperand.setRight(null);
+            if(rightOperandSibling) {
+                rightOperandSibling.setLeft(this);
+            }
+            this.addChild(rightOperand);
+        }
+        addMultiplicationOperator(this);
+    }
+
     evaluate(declarations) {
-        const variableName = this.getValue();
-        if(!declarations || !(variableName in declarations)) {
+        const variableName = this.getName();
+        if (!declarations || !(variableName in declarations)) {
             throw SyntaxError(`Expected variable is not defined ${variableName}`);
         }
         const variable = declarations[variableName];
-        if(typeof variable === "function") {
-            return Number(variable());
+        if (typeof variable === "function") {
+            if(variable.length !== this.getNumChildren()) {
+                throw SyntaxError(`Expected number of arguments ${variable.length} but got ${this.getNumChildren()}`);
+            }
+            const evaluatedArguments = this.getChildren().map(child => child.evaluate(declarations));
+            return Number(variable.apply({}, evaluatedArguments));
+        }
+        if(this.isFunction) {
+            throw SyntaxError(`Expected variable but got function ${variableName}`);
         }
         return Number(variable);
     }
