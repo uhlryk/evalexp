@@ -152,6 +152,18 @@ multiplication operator can be ignored
 EvalExp.evaluate("3someFunctions")
 ```
 
+- functions with one argument
+
+```javascript
+EvalExp.evaluate("3*someFunctions(10)")
+```
+
+complex arguments with inner functions are supported
+
+```javascript
+EvalExp.evaluate("2+funcA(2*funcB(3+4))");
+```
+
 ## About variables and functions
 
 This library does not give access to your global variables. In **execute** method all possible variables should be declared. If
@@ -186,4 +198,4 @@ evalExp.evaluate({
 
 ## limitations
 
--   functions with brackets and arguments
+-   functions with brackets and arguments (functions with one argument are supported)

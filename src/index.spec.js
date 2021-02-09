@@ -146,6 +146,23 @@ describe("EvalExp", () => {
         ).to.eql(32);
     });
 
+    it("function with one complex number argument should evaluate", () => {
+        expect(
+            EvalExp.evaluate("2+func(2*(1+3))", {
+                func: (arg) => 3*arg
+            })
+        ).to.eql(26);
+    });
+
+    it("function with other function as argument should evaluate", () => {
+        expect(
+            EvalExp.evaluate("2+funcA(2*funcB(3+4))", {
+                funcA: (arg) => 3*arg,
+                funcB: (arg) => 2*arg
+            })
+        ).to.eql(86);
+    });
+
     it("function with one number argument should throw error that wrong number of arguments", () => {
         expect(() =>
             EvalExp.evaluate("2+func(10)", {
