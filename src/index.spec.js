@@ -171,11 +171,36 @@ describe("EvalExp", () => {
         ).to.throw("Expected number of arguments 2 but got 1");
     });
 
-    it("function with one number argument should throw error that wrong number of arguments", () => {
+    it("expression with function should throw error because variable was expected", () => {
         expect(() =>
             EvalExp.evaluate("2+varA(12)", {
                 varA: 10
             })
         ).to.throw("Expected variable but got function varA");
+    });
+
+    it("function with zero number arguments should evaluate", () => {
+        expect(
+            EvalExp.evaluate("2+func()", {
+                func: () => 3
+            })
+        ).to.eql(5);
+    });
+
+    it("function with two number arguments should evaluate", () => {
+        expect(
+            EvalExp.evaluate("2+func(10, 12)", {
+                func: (arg1, arg2) => 3*arg1 + arg2
+            })
+        ).to.eql(44);
+    });
+
+    it("function with two complex function arguments should evaluate", () => {
+        expect(
+            EvalExp.evaluate("2+func1(10, func2(1,2))", {
+                func1: (arg1, arg2) => 3*arg1 + arg2,
+                func2: (arg1, arg2) => arg1 + arg2
+            })
+        ).to.eql(35);
     });
 });

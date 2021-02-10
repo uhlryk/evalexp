@@ -1,6 +1,7 @@
 import GroupToken from "./GroupToken";
 import addMultiplicationOperator from "./transformModifier/addMultiplicationOperator";
 import BracketToken from "./BracketToken";
+import ArgumentToken from "./ArgumentToken";
 
 export default class VariableToken extends GroupToken {
     static isApplicable(character) {
@@ -21,7 +22,34 @@ export default class VariableToken extends GroupToken {
         return this.name;
     }
 
-    parse() {
+    parseArguments() {
+        const nextValue = this.getIterator().getNextValue();
+        if (nextValue === "(") {
+            this.getIterator().moveLeft();
+            this.isFunction = true;
+            const nextValue = this.getIterator().getNextValue();
+            if (nextValue === ")") {
+                this.getIterator().moveLeft();
+            } else {
+                while (true) {
+                    this.parseArgument();
+                    if (this.getIterator().getValue() !== ",") {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    parseArgument() {
+        const argumentToken = new ArgumentToken(this.getIterator());
+        this.addChild(argumentToken);
+        argumentToken.setRoot(this.getRoot());
+        argumentToken.setParent(this);
+        argumentToken.parse();
+    }
+
+    parseName() {
         while (true) {
             const nextValue = this.getIterator().getNextValue();
             if (/^[a-z0-9]$/i.test(nextValue)) {
@@ -31,10 +59,16 @@ export default class VariableToken extends GroupToken {
                 break;
             }
         }
+    }
+
+    parse() {
+        this.parseName();
+        this.parseArguments();
         this.parseLeft();
     }
 
     transform() {
+        /*
         const rightOperand = this.getRight();
         if (rightOperand && rightOperand instanceof BracketToken) {
             this.isFunction = true;
@@ -51,6 +85,7 @@ export default class VariableToken extends GroupToken {
             }
             this.addChild(rightOperand);
         }
+        */
         addMultiplicationOperator(this);
     }
 
@@ -61,13 +96,19 @@ export default class VariableToken extends GroupToken {
         }
         const variable = declarations[variableName];
         if (typeof variable === "function") {
-            if(variable.length !== this.getNumChildren()) {
-                throw SyntaxError(`Expected number of arguments ${variable.length} but got ${this.getNumChildren()}`);
+            if (variable.length !== this.getNumChildren()) {
+                throw SyntaxError(
+                    `Expected number of arguments ${
+                        variable.length
+                    } but got ${this.getNumChildren()}`
+                );
             }
-            const evaluatedArguments = this.getChildren().map(child => child.evaluate(declarations));
+            const evaluatedArguments = this.getChildren().map(child =>
+                child.evaluate(declarations)
+            );
             return Number(variable.apply({}, evaluatedArguments));
         }
-        if(this.isFunction) {
+        if (this.isFunction) {
             throw SyntaxError(`Expected variable but got function ${variableName}`);
         }
         return Number(variable);
