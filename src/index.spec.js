@@ -171,6 +171,12 @@ describe("EvalExp", () => {
         ).to.throw("Expected number of arguments 2 but got 1");
     });
 
+    it("brackets without values should throw ", () => {
+        expect(() =>
+            EvalExp.evaluate("2+()", )
+        ).to.throw("Empty brackets are not allowed");
+    });
+
     it("expression with function should throw error because variable was expected", () => {
         expect(() =>
             EvalExp.evaluate("2+varA(12)", {

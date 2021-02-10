@@ -18,8 +18,7 @@ export default class BracketToken extends GroupToken {
         const nextValue = this.getIterator().getNextValue();
         // TODO I think we should not accept empty brackets  like 2 + ()*3 we should throw error in this condition
         if (nextValue === ")") {
-            this.getIterator().moveNext();
-            this.parseLeft();
+            throw SyntaxError("Empty brackets are not allowed");
         }
         this.parseUp();
         this.parseLeft();
