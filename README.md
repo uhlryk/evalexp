@@ -103,11 +103,17 @@ EvalExp.evaluate("34-21");
 EvalExp.evaluate("33-44");
 ```
 
--   power:
+-   exponentiation:
 
 ```javascript
 EvalExp.evaluate("3^2"); //9
 EvalExp.evaluate("(-3)^2"); //9
+```
+
+-   root extraction:
+
+```javascript
+EvalExp.evaluate("9^0.5"); //3
 ```
 
 -   multiplication:
