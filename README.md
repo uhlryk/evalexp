@@ -107,7 +107,7 @@ EvalExp.evaluate("33-44");
 
 ```javascript
 EvalExp.evaluate("3^2"); //9
-EvalExp.evaluate("(-3)*2"); //9
+EvalExp.evaluate("(-3)^2"); //9
 ```
 
 -   multiplication:

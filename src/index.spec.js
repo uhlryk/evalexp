@@ -80,6 +80,11 @@ describe("EvalExp", () => {
         evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(9);
     });
+    it("9^0.5", () => {
+        const evalExp = new EvalExp("9^0.5");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(3);
+    });
     describe("when variable not defined in expression numA + (varA + num C) * numD", () => {
         it("should throw error", () => {
             const evalExp = new EvalExp("10 + (varA + 5) * 2");
