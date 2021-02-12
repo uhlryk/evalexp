@@ -209,4 +209,28 @@ describe("EvalExp", () => {
             })
         ).to.eql(35);
     });
+    describe("IF function", () => {
+        const IF = (condition, isTrue, isFalse) => condition ? isTrue: isFalse;
+        it("IF function is true", () => {
+            expect(
+                EvalExp.evaluate("IF(1, 2, 3)", {
+                    IF
+                })
+            ).to.eql(2);
+        });
+        it("IF function is true", () => {
+            expect(
+                EvalExp.evaluate("IF(0, 2, 3)", {
+                    IF
+                })
+            ).to.eql(3);
+        });
+    });
+    it("Power function should evaluate", () => {
+        expect(
+            EvalExp.evaluate("POW(2, 2)", {
+                POW: (arg1, arg) => Math.pow(arg1, arg)
+            })
+        ).to.eql(4);
+    });
 });

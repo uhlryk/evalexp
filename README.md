@@ -195,3 +195,23 @@ evalExp.evaluate({
     }
 });
 ```
+
+## Support for predefined functions
+
+This library by design is not give any predefined functions. But it is build in the way that you can easily implement whatever you want 
+
+### If condition
+
+```javascript
+EvalExp.evaluate("IF(1, 2, 3)", {
+    IF: (condition, isTrue, isFalse) => condition ? isTrue: isFalse
+})
+```
+
+### power
+
+```javascript
+EvalExp.evaluate("POW(2, 2)", {
+    POW: (arg1, arg) => Math.pow(arg1, arg)
+})
+```
