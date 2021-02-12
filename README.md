@@ -71,91 +71,98 @@ evaluate("3k6+2strength", {
 -   minus numbers:
 
 ```javascript
-EvalExp.evaluate("-5") 
-EvalExp.evaluate("-5*3") 
+EvalExp.evaluate("-5");
+EvalExp.evaluate("-5*3");
 ```
 
 -   plus numbers:
 
 ```javascript
-EvalExp.evaluate("5")
-EvalExp.evaluate("+5")
+EvalExp.evaluate("5");
+EvalExp.evaluate("+5");
 ```
 
 -   floating numbers :
 
 ```javascript
-EvalExp.evaluate("4.345")
+EvalExp.evaluate("4.345");
 ```
 
 -   addition:
 
 ```javascript
-EvalExp.evaluate("5+4")
-EvalExp.evaluate("+4+34")
-EvalExp.evaluate("56.43+32")
+EvalExp.evaluate("5+4");
+EvalExp.evaluate("+4+34");
+EvalExp.evaluate("56.43+32");
 ```
 
 -   subtraction:
 
 ```javascript
-EvalExp.evaluate("34-21")
-EvalExp.evaluate("33-44")
+EvalExp.evaluate("34-21");
+EvalExp.evaluate("33-44");
+```
+
+-   power:
+
+```javascript
+EvalExp.evaluate("3^2"); //9
+EvalExp.evaluate("(-3)*2"); //9
 ```
 
 -   multiplication:
 
 ```javascript
-EvalExp.evaluate("5*5")
-EvalExp.evaluate("-3*8")
+EvalExp.evaluate("5*5");
+EvalExp.evaluate("-3*8");
 ```
 
 -   division:
 
 ```javascript
-EvalExp.evaluate("10/2")
+EvalExp.evaluate("10/2");
 ```
 
 -   brackets:
 
 ```javascript
-EvalExp.evaluate("5*(3+(5-3)/4)")
+EvalExp.evaluate("5*(3+(5-3)/4)");
 ```
 
 multiplication operator can be ignored
 
 ```javascript
-EvalExp.evaluate("3(10+45)")
+EvalExp.evaluate("3(10+45)");
 ```
 
 -   variables
 
 ```javascript
-EvalExp.evaluate("3*someVariable")
+EvalExp.evaluate("3*someVariable");
 ```
 
 multiplication operator can be ignored
 
 ```javascript
-EvalExp.evaluate("3someVariable")
+EvalExp.evaluate("3someVariable");
 ```
 
 -   functions without arguments - use like variables (without brackets)
 
 ```javascript
-EvalExp.evaluate("3*someFunctions")
+EvalExp.evaluate("3*someFunctions");
 ```
 
 multiplication operator can be ignored
 
 ```javascript
-EvalExp.evaluate("3someFunctions")
+EvalExp.evaluate("3someFunctions");
 ```
 
 - functions with arguments
 
 ```javascript
-EvalExp.evaluate("3*someFunctions(10)")
+EvalExp.evaluate("3*someFunctions(10)");
 ```
 
 complex arguments with inner functions are supported

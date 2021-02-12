@@ -55,6 +55,31 @@ describe("EvalExp", () => {
         expect(evalExp.evaluate()).to.be.eql(0);
     });
 
+    it("3^2", () => {
+        const evalExp = new EvalExp("3^2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(9);
+    });
+    it("3^2*2", () => {
+        const evalExp = new EvalExp("3^2*2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(18);
+    });
+    it("3^(2+1)", () => {
+        const evalExp = new EvalExp("3^(2+1)");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(27);
+    });
+    it("-3^2", () => {
+        const evalExp = new EvalExp("-3^2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(-9);
+    });
+    it("(-3)^2", () => {
+        const evalExp = new EvalExp("(-3)^2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(9);
+    });
     describe("when variable not defined in expression numA + (varA + num C) * numD", () => {
         it("should throw error", () => {
             const evalExp = new EvalExp("10 + (varA + 5) * 2");
