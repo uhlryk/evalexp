@@ -1,6 +1,6 @@
 {
   "name": "evalexp",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Mathematical expression parser and evaluator",
   "main": "build/index.js",
   "scripts": {
