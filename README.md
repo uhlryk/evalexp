@@ -116,6 +116,12 @@ EvalExp.evaluate("(-3)^2"); //9
 EvalExp.evaluate("9^0.5"); //3
 EvalExp.evaluate("27^(1/3)"); //3
 ```
+-   modulo:
+
+```javascript
+EvalExp.evaluate("6%2"); //0
+EvalExp.evaluate("7%2"); //1
+```
 
 -   multiplication:
 

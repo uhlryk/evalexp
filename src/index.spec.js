@@ -55,6 +55,24 @@ describe("EvalExp", () => {
         expect(evalExp.evaluate()).to.be.eql(0);
     });
 
+    it("6 % 2", () => {
+        const evalExp = new EvalExp("6 % 2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(0);
+    });
+
+    it("7 % 2", () => {
+        const evalExp = new EvalExp("7 % 2");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(1);
+    });
+
+    it("7 % 2 * 3", () => {
+        const evalExp = new EvalExp("7 % 2 * 3");
+        evalExp.parse();
+        expect(evalExp.evaluate()).to.be.eql(3);
+    });
+
     it("3^2", () => {
         const evalExp = new EvalExp("3^2");
         evalExp.parse();
