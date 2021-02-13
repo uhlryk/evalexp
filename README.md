@@ -14,7 +14,7 @@ It is parsing string, based on it, creates new expression and evaluating it.
 
 Because parsing is complex, library is creating parsing object and when you need to use different variables with same expression it should be evaluated faster
 
-## my motivation to write it
+## Motivation
 
 User writes input like this
 
@@ -212,7 +212,7 @@ evalExp.evaluate({
 
 ## Support for predefined functions
 
-This library by design is not give any predefined functions. But it is build in the way that you can easily implement whatever you want 
+This library by design does not give any predefined functions. It can be easily extended with any function you want 
 
 ### If condition
 
