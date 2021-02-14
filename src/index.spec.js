@@ -3,7 +3,6 @@ import EvalExp, {evaluate} from "./index";
 describe("EvalExp", () => {
     it("numA", () => {
         const evalExp = new EvalExp("10");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(10);
     });
     it("numA from function", () => {
@@ -11,107 +10,88 @@ describe("EvalExp", () => {
     });
     it("-numA*numB", () => {
         const evalExp = new EvalExp("-5*3");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(-15);
     });
     it("floatA", () => {
         const evalExp = new EvalExp("10.4");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(10.4);
     });
     it("numA + numB", () => {
         const evalExp = new EvalExp("10 + 20");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(30);
     });
 
     it("+numA", () => {
         const evalExp = new EvalExp("+10");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(10);
     });
 
     it("-numA", () => {
         const evalExp = new EvalExp("-10");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(-10);
     });
 
     it("numA + (numB + num C) * numD", () => {
         const evalExp = new EvalExp("10 + (20 + 5) * 2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(60);
     });
 
     it("numA + (-num C) * numD", () => {
         const evalExp = new EvalExp("10 + (-10) * 2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(-10);
     });
 
     it("numA + (numBsmall-numCbig) * numD", () => {
         const evalExp = new EvalExp("10 + (5-10) * 2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(0);
     });
 
     it("6 % 2", () => {
         const evalExp = new EvalExp("6 % 2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(0);
     });
 
     it("7 % 2", () => {
         const evalExp = new EvalExp("7 % 2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(1);
     });
 
     it("7 % 2 * 3", () => {
         const evalExp = new EvalExp("7 % 2 * 3");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(3);
     });
 
     it("3^2", () => {
         const evalExp = new EvalExp("3^2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(9);
     });
     it("3^2*2", () => {
         const evalExp = new EvalExp("3^2*2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(18);
     });
     it("3^(2+1)", () => {
         const evalExp = new EvalExp("3^(2+1)");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(27);
     });
     it("-3^2", () => {
         const evalExp = new EvalExp("-3^2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(-9);
     });
     it("(-3)^2", () => {
         const evalExp = new EvalExp("(-3)^2");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(9);
     });
     it("9^0.5", () => {
         const evalExp = new EvalExp("9^0.5");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(3);
     });
     it("27^(1/3)", () => {
         const evalExp = new EvalExp("27^(1/3)");
-        evalExp.parse();
         expect(evalExp.evaluate()).to.be.eql(3);
     });
     describe("when variable not defined in expression numA + (varA + num C) * numD", () => {
         it("should throw error", () => {
             const evalExp = new EvalExp("10 + (varA + 5) * 2");
-            evalExp.parse();
             expect(() => evalExp.evaluate()).to.throw(
                 "Expected variable is not defined varA"
             );
@@ -121,7 +101,6 @@ describe("EvalExp", () => {
     describe("when parse method whas not executed", () => {
         it("should throw error", () => {
             const evalExp = new EvalExp("10 + (varA + 5) * 2");
-            evalExp.parse();
             expect(() => evalExp.evaluate()).to.throw(
                 "Expected variable is not defined varA"
             );
@@ -162,7 +141,6 @@ describe("EvalExp", () => {
     describe("when variable is defined and is no arg func in expression numA + (varA + num C) * numD", () => {
         it("should evaluate", () => {
             const evalExp = new EvalExp("10 + (varA + 5) * 2");
-            evalExp.parse();
             expect(
                 evalExp.evaluate({
                     varA: () => 5
@@ -173,7 +151,6 @@ describe("EvalExp", () => {
 
     it("3k6+2strength", () => {
         const evalExp = new EvalExp("3k6+2strength");
-        evalExp.parse();
         expect(
             evalExp.evaluate({
                 k6: () => 3,
@@ -290,7 +267,6 @@ describe("EvalExp", () => {
     it("Evaluate array of inputs", () => {
         const someInput = [1, 2, 3, 4, 5, 6, 7];
         const evalExp = new EvalExp("x+1");
-        evalExp.parse();
         expect(
             someInput.map(x => evalExp.evaluate({x}))
         ).to.eql([2,3,4,5,6,7,8]);

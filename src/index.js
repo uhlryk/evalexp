@@ -12,25 +12,12 @@ class EvalExp {
         this.rootToken = null;
     }
 
-    parse() {
-        this.rootToken = lexer(this.expression);
-        transformer(this.rootToken);
-    }
-
-    getParsedTree() {
-        this.parseIfNotParsed();
-        return this.rootToken;
-    }
-
     evaluate(declarations = {}) {
-        this.parseIfNotParsed();
-        return this.rootToken.evaluate(declarations);
-    }
-
-    parseIfNotParsed() {
         if (!this.rootToken) {
-            this.parse();
+            this.rootToken = lexer(this.expression);
+            transformer(this.rootToken);
         }
+        return this.rootToken.evaluate(declarations);
     }
 }
 function evaluate(expression, declarations) {

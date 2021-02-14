@@ -32,7 +32,6 @@ import EvalExp from "evalexp";
 const { EvalExp } = require("evalexp");
 
 const evalExp = new EvalExp("3k6 + 2strength");
-evalExp.parse();
 evalExp.evaluate({
     k6: () => 3,
     strength: 2
@@ -65,8 +64,18 @@ evaluate("3k6+2strength", {
 
 -   **EvalExp.evaluate(expression string, variable declaration)** - evaluate expression and return value
 -   **new EvalExp(<expression string>)** - create instance for expression
--   **instance.parse()** - parse expression
 -   **instance.evaluate(variable declaration)** - evaluate expression and return value. Can be invoked multiple times with different variable declarations
+
+## difference between EvalExp.evaluate() and instance.evaluate() 
+
+For expressions without variables and functions or for expressions that will be evaluate once you can use any of those methods.
+
+When you plan evaluate one expression multiple times with different values you should use
+
+```javascript
+instance.evaluate()
+```
+It is because for all instance evaluations, there will be only one parse process.
 
 ## evaluate one expression multiple times with different values
 
@@ -207,7 +216,6 @@ variable varA is used in expression and is declated in evaluate function:
 import EvalExp from "evalexp";
 
 const evalExp = new EvalExp("10 + (varA + 5) * 2");
-evalExp.parse();
 evalExp.evaluate({
     varA: 3
 });
@@ -219,7 +227,6 @@ varA is declared as function and because of it, it will be executed as function 
 import EvalExp from "evalexp";
 
 const evalExp = new EvalExp("10 + (varA + 5) * 2");
-evalExp.parse();
 evalExp.evaluate({
     varA() {
         return 5;
