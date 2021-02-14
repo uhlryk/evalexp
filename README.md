@@ -49,10 +49,11 @@ EvalExp.evaluate("3k6+2strength", {
 ```
 
 or from function
+
 ```javascript
-import {evaluate} from "evalexp";
+import { evaluate } from "evalexp";
 //or
-const {evaluate} =  require("evalexp");
+const { evaluate } = require("evalexp");
 
 evaluate("3k6+2strength", {
     k6: () => 3,
@@ -61,10 +62,19 @@ evaluate("3k6+2strength", {
 ```
 
 ## methods
--   **EvalExp.evaluate(expression string, variable declaration)** - evaluate expression and return value   
+
+-   **EvalExp.evaluate(expression string, variable declaration)** - evaluate expression and return value
 -   **new EvalExp(<expression string>)** - create instance for expression
 -   **instance.parse()** - parse expression
 -   **instance.evaluate(variable declaration)** - evaluate expression and return value. Can be invoked multiple times with different variable declarations
+
+## evaluate one expression multiple times with different values
+
+```javascript
+const evalExp = new EvalExp("x+1");
+const someInput = [1, 2, 3, 4, 5, 6, 7];
+someInput.map(x => evalExp.evaluate({ x })) // [2, 3, 4, 5, 6, 7, 8])
+```
 
 ## supported grammar
 
@@ -116,6 +126,7 @@ EvalExp.evaluate("(-3)^2"); //9
 EvalExp.evaluate("9^0.5"); //3
 EvalExp.evaluate("27^(1/3)"); //3
 ```
+
 -   modulo:
 
 ```javascript
@@ -172,7 +183,7 @@ multiplication operator can be ignored
 EvalExp.evaluate("3someFunctions");
 ```
 
-- functions with arguments
+-   functions with arguments
 
 ```javascript
 EvalExp.evaluate("3*someFunctions(10)");
@@ -218,14 +229,14 @@ evalExp.evaluate({
 
 ## Support for predefined functions
 
-This library by design does not give any predefined functions. It can be easily extended with any function you want 
+This library by design does not give any predefined functions. It can be easily extended with any function you want
 
 ### If condition
 
 ```javascript
 EvalExp.evaluate("IF(1, 2, 3)", {
-    IF: (condition, isTrue, isFalse) => condition ? isTrue: isFalse
-})
+    IF: (condition, isTrue, isFalse) => (condition ? isTrue : isFalse)
+});
 ```
 
 ### power
@@ -233,5 +244,5 @@ EvalExp.evaluate("IF(1, 2, 3)", {
 ```javascript
 EvalExp.evaluate("POW(2, 2)", {
     POW: (arg1, arg) => Math.pow(arg1, arg)
-})
+});
 ```

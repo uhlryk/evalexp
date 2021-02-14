@@ -286,4 +286,13 @@ describe("EvalExp", () => {
             })
         ).to.eql(4);
     });
+
+    it("Evaluate array of inputs", () => {
+        const someInput = [1, 2, 3, 4, 5, 6, 7];
+        const evalExp = new EvalExp("x+1");
+        evalExp.parse();
+        expect(
+            someInput.map(x => evalExp.evaluate({x}))
+        ).to.eql([2,3,4,5,6,7,8]);
+    });
 });
